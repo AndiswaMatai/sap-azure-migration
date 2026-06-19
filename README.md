@@ -1,5 +1,11 @@
 # SAP ECC → Azure Migration Pipeline
 
+![Sector](https://img.shields.io/badge/Sector-ERP%20Migration-1a4b8c?style=flat)
+![CI](https://img.shields.io/badge/CI-passing-0f7a4b?style=flat&logo=githubactions)
+![Python](https://img.shields.io/badge/Python-3.12-blue?style=flat&logo=python)
+
+**[← Back to live portfolio](https://andiswamatai.github.io)**
+
 A production-style data migration pipeline that extracts SAP ECC flat-file exports (GL accounts, vendors, purchase orders, journal entries), validates them against migration rules, and loads them into Azure-ready conformed tables — the pattern used when moving an ERP from on-premise SAP to Azure SQL / Synapse Analytics.
 
 ## Why this exists
