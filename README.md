@@ -52,6 +52,15 @@ Azure Data Factory + Databricks Jobs
             ↓
 📊 Consumption Layer
 Power BI / Reporting / Analytics
+---
+
+This architecture ensures:
+
+- Full traceability from SAP source to analytics output
+- Zero-loss migration with validation checkpoints
+- Scalable processing using Spark
+- Separation of raw, clean, and business-ready data
+- Cloud-native orchestration and monitoring
 
 ---
 
