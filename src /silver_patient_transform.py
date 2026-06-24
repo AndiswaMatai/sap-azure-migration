@@ -1,29 +1,24 @@
-import pandas as pd
+from pyspark.sql.functions import col, upper, when
 
-def transform_patients(df: pd.DataFrame) -> pd.DataFrame:
+def transform_silver(df):
     """
     Silver layer:
-    - Removes duplicates
-    - Handles nulls
-    - Standardises formats
+    - Deduplication
+    - Null handling
+    - Standardisation
     """
 
-    initial_count = len(df)
+    df_clean = (
+        df.dropDuplicates()
+        .fillna("UNKNOWN")
+    )
 
-    # Remove duplicates
-    df = df.drop_duplicates()
+    if "gender" in df_clean.columns:
+        df_clean = df_clean.withColumn(
+            "gender",
+            upper(col("gender"))
+        )
 
-    # Fill missing values
-    df = df.fillna({
-        "patient_id": "UNKNOWN",
-        "name": "UNKNOWN",
-        "gender": "UNKNOWN"
-    })
+    print(f"[SILVER] Records after cleaning: {df_clean.count()}")
 
-    # Standardise text fields
-    if "gender" in df.columns:
-        df["gender"] = df["gender"].str.upper()
-
-    print(f"[SILVER] Cleaned records: {initial_count} → {len(df)}")
-
-    return df
+    return df_clean
