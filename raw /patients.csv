@@ -1,0 +1,5 @@
+patient_id,name,gender,age
+P001,John Doe,male,34
+P002,Jane Smith,female,29
+P003,Alex Brown,,45
+P001,John Doe,male,34
