@@ -1,16 +1,18 @@
-import pandas as pd
+from pyspark.sql.functions import count, when, col
 
-def generate_patient_metrics(df: pd.DataFrame) -> pd.DataFrame:
+def build_gold(df):
     """
     Gold layer:
-    Business-ready aggregated dataset
+    Aggregated healthcare metrics
     """
 
-    metrics = {
-        "total_patients": len(df),
-        "unique_patients": df["patient_id"].nunique() if "patient_id" in df else 0,
-        "male_patients": len(df[df["gender"] == "MALE"]) if "gender" in df else 0,
-        "female_patients": len(df[df["gender"] == "FEMALE"]) if "gender" in df else 0
-    }
+    result = df.groupBy().agg(
+        count("*").alias("total_patients"),
+        count("patient_id").alias("patient_records"),
+        count(when(col("gender") == "MALE", True)).alias("male_patients"),
+        count(when(col("gender") == "FEMALE", True)).alias("female_patients")
+    )
 
-    return pd.DataFrame([metrics])
+    result.show()
+
+    return result
