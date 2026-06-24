@@ -52,6 +52,7 @@ Azure Data Factory + Databricks Jobs
             ↓
 📊 Consumption Layer
 Power BI / Reporting / Analytics
+
 ---
 
 This architecture ensures:
@@ -104,6 +105,26 @@ Structured using enterprise-grade data engineering principles:
 - orchestration
 - infrastructure
 
+---
+
+## 📊 Analytics & Power BI Layer
+
+The Gold layer is designed to directly feed Power BI dashboards used by healthcare operations teams.
+
+### Key Metrics Available:
+
+- Total Active Patients
+- Patient Demographics (Gender / Age Distribution)
+- Appointment Volume Trends
+- Billing Summary
+- Claims Processing Status
+
+### Data Output Format:
+
+- Delta Lake Gold Tables
+- Aggregated fact tables
+- Star schema ready datasets
+  
 ---
 
 ## ▶️ How to Run
