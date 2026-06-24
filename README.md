@@ -38,11 +38,20 @@ This platform demonstrates how a structured migration approach solves these chal
 
 ## 🏗️ Architecture
 
-The platform follows a layered Medallion Architecture:
-
-- **Bronze Layer** → Raw ingestion from SAP extracts
-- **Silver Layer** → Data cleansing and standardisation
-- **Gold Layer** → Analytics-ready datasets for reporting
+🏢 Business Layer
+SAP ECC + Clinical Systems + Billing Systems
+            ↓
+☁️ Migration Layer
+Azure Data Factory + Databricks Jobs
+            ↓
+🥉 Bronze Layer (Raw SAP Extracts)
+            ↓
+🥈 Silver Layer (Cleaned + Standardised Data)
+            ↓
+🥇 Gold Layer (Analytics + KPIs)
+            ↓
+📊 Consumption Layer
+Power BI / Reporting / Analytics
 
 ---
 
