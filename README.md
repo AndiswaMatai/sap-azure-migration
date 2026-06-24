@@ -1,90 +1,87 @@
-# SAP ECC → Azure Migration Pipeline
+# 🏥 Healthcare Data Migration Platform
 
-![Sector](https://img.shields.io/badge/Sector-ERP%20Migration-1a4b8c?style=flat)
-![CI](https://img.shields.io/badge/CI-passing-0f7a4b?style=flat&logo=githubactions)
-![Python](https://img.shields.io/badge/Python-3.12-blue?style=flat&logo=python)
+![Sector](https://img.shields.io/badge/Sector-Healthcare-005EB8?style=flat)
+![Cloud](https://img.shields.io/badge/Azure-Cloud-blue?style=flat)
+![Processing](https://img.shields.io/badge/Engine-PySpark-orange?style=flat)
+![Architecture](https://img.shields.io/badge/Architecture-Medallion-green?style=flat)
 
-**[← Back to live portfolio](https://andiswamatai.github.io)**
+---
 
-A production-style data migration pipeline that extracts SAP ECC flat-file exports (GL accounts, vendors, purchase orders, journal entries), validates them against migration rules, and loads them into Azure-ready conformed tables — the pattern used when moving an ERP from on-premise SAP to Azure SQL / Synapse Analytics.
+## 🚀 Overview
 
-## Why this exists
+A production-style healthcare data migration platform that demonstrates how enterprise healthcare systems migrate from SAP-based environments into a modern Azure Lakehouse architecture.
 
-SAP migrations are high-stakes: a single bad record (deleted PO, duplicate vendor, zero-value entry) can break downstream financial reporting. This project demonstrates the three-phase approach that makes migrations safe: extract → validate → transform, with every rejected record logged for sign-off before go-live.
+The system implements a Medallion Architecture (Bronze → Silver → Gold) using Apache Spark principles, simulating real-world data engineering migration patterns used in enterprise healthcare organisations.
 
-## SAP Tables Modelled
+---
 
-| SAP Table | Description | Azure Target |
-|---|---|---|
-| SKA1 | GL Account master | `az_gl_accounts` |
-| LFA1 | Vendor master | `az_vendors` |
-| EKKO/EKPO | Purchase order header/line | `az_purchase_orders` |
-| BSEG | Accounting document line items | `az_journal_entries` |
+## 🧠 Business Problem
 
-## Architecture
+Healthcare organisations face significant challenges when modernising legacy SAP systems:
 
-```
-SAP ECC extract (flat CSV)
-        │
-        ▼
-[Phase 1: Extract]  generate_sample_data.py  →  data/raw/*.csv
-        │
-        ▼
-[Phase 2: Validate]  run_migration.py
-   • Deleted records (LOEKZ = L)
-   • Duplicate keys
-   • Zero/negative values
-   • Missing mandatory fields
-        │
-        ├── REJECTED ──▶ migration_validation_log (ERROR / WARNING)
-        │
-        ▼
-[Phase 3: Transform & Load]
-   • SAP field names → business-friendly Azure column names
-   • SAP date format (YYYYMMDD) → ISO 8601
-   • Debit/Credit (S/H) → signed amounts
-        │
-        ▼
-   az_gl_accounts / az_vendors / az_purchase_orders / az_journal_entries
-```
+- Large volumes of structured and semi-structured clinical data
+- Inconsistent or duplicated patient records
+- Regulatory and compliance constraints
+- Zero tolerance for data loss
+- Complex downstream reporting requirements
 
-## Sample Migration Run
+This project demonstrates how these challenges are addressed using scalable data engineering patterns.
 
-```
-Entity               Source  Passed  Migrated  Rejected
--------------------------------------------------------
-GL Accounts              40      40        40         0
-Vendors                  10      10        10         0
-Purchase Orders         120     118       118         2
-Journal Entries         300     300       300         0
+---
 
-VALIDATION LOG: WARNING: 2 (deleted POs excluded)
-```
+## 🏗️ Architecture
 
-## Tech stack
+The platform follows a layered Medallion Architecture:
 
-Python, SQLite (→ Azure SQL / Synapse in production), standard library only.
+- **Bronze Layer** → Raw ingestion from SAP extracts
+- **Silver Layer** → Data cleansing and standardisation
+- **Gold Layer** → Analytics-ready datasets for reporting
 
-## Running it
+---
+
+## ⚙️ Key Features (Foundation Level)
+
+### 🔹 Data Ingestion
+- Simulated SAP extract ingestion
+- Raw CSV-based staging layer
+
+### 🔹 Data Transformation
+- Patient data standardisation
+- Duplicate handling
+- Null value cleaning
+
+### 🔹 Medallion Structure
+- Bronze → Silver → Gold progression
+- Clear separation of data layers
+
+---
+
+## 🧱 Tech Stack
+
+- Python
+- PySpark (design patterns)
+- Azure Data Lake (architecture simulation)
+- Delta Lake (conceptual design)
+- GitHub (version control)
+
+---
+
+## 📂 Project Structure
+
+Structured using enterprise-grade data engineering principles:
+
+- ingestion
+- bronze
+- silver
+- gold
+- quality
+- reconciliation
+- orchestration
+- infrastructure
+
+---
+
+## ▶️ How to Run
 
 ```bash
-python src/generate_sample_data.py
-python src/run_migration.py
-```
-
-Run the tests:
-
-```bash
-python -m unittest discover -s tests -v
-```
-
-## What I'd add for production
-
-- Replace flat-file extracts with SAP RFC/BAPI calls using `pyrfc` for live extraction
-- Add delta extraction logic (capture only records changed since last run using CDHDR change documents)
-- Load into Azure Data Factory with Synapse Analytics as the target
-- Build a migration dashboard in Power BI showing entity-by-entity progress, rejection rates, and validation trends
-
-## License
-
-MIT
+python src/orchestration/pipeline.py
