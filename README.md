@@ -1,31 +1,38 @@
 # 🏥 Healthcare Data Migration Platform
 
-![Sector](https://img.shields.io/badge/Sector-Healthcare-005EB8?style=flat)
-![Cloud](https://img.shields.io/badge/Azure-Cloud-blue?style=flat)
-![Processing](https://img.shields.io/badge/Engine-PySpark-orange?style=flat)
-![Architecture](https://img.shields.io/badge/Architecture-Medallion-green?style=flat)
+![Azure](https://img.shields.io/badge/Azure-Databricks-blue)
+![Architecture](https://img.shields.io/badge/Lakehouse-Medallion-green)
+![Pipeline](https://img.shields.io/badge/Data%20Engineering-Spark-orange)
+![CI/CD](https://img.shields.io/badge/Automation-GitHub%20Actions-purple)
 
 ---
 
-## 🚀 Overview
+## 🚀 Executive Summary
 
-A production-style healthcare data migration platform that demonstrates how enterprise healthcare systems migrate from SAP-based environments into a modern Azure Lakehouse architecture.
+This project simulates a real-world enterprise healthcare data migration program where legacy SAP systems are modernised into an Azure Lakehouse architecture using Databricks and Delta Lake.
 
-The system implements a Medallion Architecture (Bronze → Silver → Gold) using Apache Spark principles, simulating real-world data engineering migration patterns used in enterprise healthcare organisations.
+The platform demonstrates how large-scale clinical and operational datasets are:
+
+- Extracted from SAP systems
+- Validated and standardised
+- Transformed using Spark-based Medallion architecture
+- Loaded into Delta Lake
+- Served to Power BI for analytics and reporting
+
+It reflects how data engineering teams design **secure, scalable, and auditable migration pipelines in regulated industries like healthcare.**
 
 ---
 
-## 🧠 Business Problem
+## 🧠 Business Context
 
-Healthcare organisations face significant challenges when modernising legacy SAP systems:
+Healthcare organisations face increasing pressure to modernise legacy systems while maintaining:
 
-- Large volumes of structured and semi-structured clinical data
-- Inconsistent or duplicated patient records
-- Regulatory and compliance constraints
-- Zero tolerance for data loss
-- Complex downstream reporting requirements
+- Regulatory compliance (HIPAA/GDPR-style constraints)
+- Zero data loss tolerance
+- Historical data integrity
+- Accurate patient and billing records
 
-This project demonstrates how these challenges are addressed using scalable data engineering patterns.
+This platform demonstrates how a structured migration approach solves these challenges using cloud-native engineering patterns.
 
 ---
 
