@@ -127,6 +127,21 @@ The Gold layer is designed to directly feed Power BI dashboards used by healthca
   
 ---
 
+## 🧠 Engineering Decisions
+
+| Decision | Rationale |
+|----------|----------|
+| Medallion Architecture | Ensures structured data refinement from raw to analytics-ready datasets |
+| Databricks + Spark | Enables distributed processing of large healthcare datasets |
+| Delta Lake | Provides ACID transactions and supports schema evolution |
+| ADF Orchestration | Handles scheduled and event-driven SAP extraction workflows |
+| Key Vault Integration | Ensures secure handling of credentials and secrets |
+| GitHub Actions | Enables automated validation and CI/CD workflows |
+| Terraform | Ensures reproducible Azure infrastructure provisioning |
+| Power BI Gold Layer | Provides business-ready reporting datasets |
+
+---
+
 ## ▶️ How to Run
 
 ```bash
