@@ -1,15 +1,17 @@
-import os
-import pandas as pd
+from common.spark_session import get_spark
 
-def load_to_bronze(df: pd.DataFrame, output_path: str):
-    """
-    Bronze layer = raw persisted data (no transformations)
-    """
+def load_bronze(file_path: str):
+    spark = get_spark()
 
-    os.makedirs(os.path.dirname(output_path), exist_ok=True)
+    df = (
+        spark.read
+        .option("header", True)
+        .csv(file_path)
+    )
 
-    df.to_csv(output_path, index=False)
+    # Normalize column names (SAP-style inconsistency handling)
+    df = df.toDF(*[c.strip().lower() for c in df.columns])
 
-    print(f"[BRONZE] Data written to bronze layer: {output_path}")
+    print(f"[BRONZE] Loaded {df.count()} records")
 
     return df
