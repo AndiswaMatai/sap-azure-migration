@@ -66,6 +66,7 @@ Python · PySpark · Azure Data Lake · Delta Lake · Databricks · GitHub Actio
 ---
 
 ## 📂 Project Structure
+```
 healthcare-data-migration/
 ├── ingestion/        # SAP extract ingestion scripts
 ├── bronze/           # Raw staging datasets
@@ -78,7 +79,7 @@ healthcare-data-migration/
 ├── dashboards/       # Power BI models + reports
 ├── tests/            # Unit/integration tests
 └── README.md         # Documentation
-
+```
 
 ---
 
